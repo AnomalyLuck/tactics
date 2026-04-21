@@ -76,6 +76,7 @@ export default class GameService extends Service {
         getMyAvatar: [],
         saveMyAvatar: ['game:avatar'],
         getMyAvatarList: [],
+        getMyUnitList: [],
         getPlayersAvatar: ['uuid[]'],
       },
       events: {
@@ -910,6 +911,12 @@ export default class GameService extends Service {
     const playerAvatars = await this.data.getPlayerAvatars(player);
 
     return playerAvatars.listAvatars;
+  }
+  async onGetMyUnitListRequest(client) {
+    const player = GameSession.cache.get(client.id).player;
+    const playerAvatars = await this.data.getPlayerAvatars(player);
+
+    return playerAvatars.listUnits;
   }
   async onGetPlayersAvatarRequest(client, playerIds) {
     return this.data.listPlayersAvatar(playerIds);
