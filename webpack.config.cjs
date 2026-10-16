@@ -92,4 +92,8 @@ module.exports = {
   ],
   devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
   performance: { hints: false },
+  watchOptions: {
+    poll: 1000,
+    ignored: /node_modules/,
+  },
 };

@@ -1,0 +1,343 @@
+.popup.unitInfoPopup {
+  .unitInfo {
+    color: #f1e5cc;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+
+    .tabBar {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #5a4a30;
+
+      .tab {
+        flex: 1;
+        padding: 6px 10px;
+        border: 1px solid transparent;
+        border-bottom: none;
+        border-radius: 4px 4px 0 0;
+        background: transparent;
+        color: #c9b88c;
+        font-family: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+
+        &:hover {
+          color: #ffffff;
+        }
+
+        &.active {
+          background-color: rgba(255, 238, 204, 0.08);
+          border-color: #5a4a30;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .tabPanel {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #5a4a30;
+
+      .name {
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+
+        &.tier1 { color: #aaa9ad; }
+        &.tier2 { color: #daa520; }
+        &.tier3, &.tier4 { color: #ffa500; }
+      }
+
+      .title {
+        font-style: italic;
+        color: #c9b88c;
+      }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 12px;
+      row-gap: 4px;
+    }
+
+    .row {
+      display: contents;
+
+      .label {
+        color: #c9b88c;
+        white-space: nowrap;
+      }
+
+      .value {
+        text-align: right;
+      }
+    }
+
+    .mod {
+      margin-left: 4px;
+      font-size: 11px;
+
+      &.positive { color: #00cc00; }
+      &.negative { color: #ff4444; }
+    }
+
+    .statuses {
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px solid #5a4a30;
+
+      .label {
+        color: #c9b88c;
+        margin-bottom: 4px;
+      }
+
+      UL {
+        margin: 0;
+        padding-left: 18px;
+      }
+    }
+
+    .notice {
+      margin-top: 10px;
+      padding: 6px 8px;
+      border: 1px solid #5a4a30;
+      border-radius: 3px;
+      background-color: rgba(255, 238, 204, 0.08);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .damageList {
+      display: flex;
+      flex-direction: column;
+
+      & + .damageList {
+        margin-top: 10px;
+      }
+
+      .damageHeader,
+      .damageRow {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        column-gap: 12px;
+        align-items: center;
+        padding: 4px 6px;
+      }
+
+      // Multi-attack table (e.g. MudGolem: melee + Quake at 3 ranges): one
+      // damage column per attack, sized by the --damage-cols custom property.
+      &.multi {
+        .damageHeader,
+        .damageRow {
+          grid-template-columns: max-content repeat(var(--damage-cols), minmax(0, 1fr));
+          column-gap: 8px;
+        }
+
+        .damageRow .outcome {
+          font-size: 11px;
+        }
+      }
+
+      .damageHeader {
+        color: #c9b88c;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid #5a4a30;
+      }
+
+      .damageRow {
+        border-bottom: 1px solid rgba(90, 74, 48, 0.4);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .targetName {
+        color: #ffffff;
+
+        .team {
+          margin-left: 6px;
+          font-size: 10px;
+          padding: 1px 5px;
+          border: 1px solid #5a4a30;
+          border-radius: 2px;
+          color: #c9b88c;
+        }
+      }
+
+      .outcome {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+
+        &.damage   { color: #ff8866; }
+        &.chance   { color: #ffcc66; }
+        &.heal     { color: #66ff99; }
+        &.immune   { color: #888888; font-style: italic; }
+        &.blocked  { color: #ff4444; font-style: italic; }
+        &.effect   { color: #cc99ff; }
+      }
+    }
+
+    .comboList {
+      display: flex;
+      flex-direction: column;
+
+      .comboControls {
+        margin-bottom: 6px;
+
+        .comboToggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          color: #c9b88c;
+          -webkit-tap-highlight-color: transparent;
+
+          &:hover {
+            color: #ffffff;
+          }
+
+          INPUT {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .healNote {
+        margin-left: 6px;
+        color: #66ff99;
+      }
+
+      .comboMeta {
+        color: #c9b88c;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 4px 6px;
+      }
+
+      .comboRows {
+        max-height: 320px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .comboTier {
+        margin: 10px 6px 2px;
+        padding-bottom: 3px;
+        border-bottom: 1px solid #5a4a30;
+        color: #ffd479;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      .comboRow {
+        display: grid;
+        grid-template-columns: max-content 1fr max-content;
+        column-gap: 12px;
+        align-items: center;
+        padding: 4px 6px;
+        border-bottom: 1px solid rgba(90, 74, 48, 0.4);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .comboLabel {
+          color: #c9b88c;
+          white-space: nowrap;
+        }
+
+        .comboUnits {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 2px;
+          color: #ffffff;
+        }
+
+        .comboPlus {
+          color: #c9b88c;
+          font-size: 11px;
+        }
+
+        .comboDamage {
+          text-align: right;
+          color: #ff8866;
+          font-variant-numeric: tabular-nums;
+        }
+      }
+    }
+
+    // Small unit thumbnail, shared by the Damage and Kill Combos tabs: a clipped
+    // box holding the full-size avatar sprite (120x122, positioned by
+    // Tactics.getAvatarImage) scaled down to fit, with an optional caption.
+    $combo-icon-scale: 0.32;
+    .comboUnit {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 auto;
+
+      .comboUnitIcon {
+        position: relative;
+        width: 120px * $combo-icon-scale;
+        height: 122px * $combo-icon-scale;
+        overflow: hidden;
+
+        .comboUnitInner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 120px;
+          height: 122px;
+          transform: scale($combo-icon-scale);
+          transform-origin: top left;
+
+          IMG {
+            position: absolute;
+            transform: translate(60px, 94px);
+          }
+        }
+      }
+
+      .comboUnitTag {
+        margin-top: -2px;
+        font-size: 9px;
+        line-height: 1;
+        color: #cc99ff;
+        white-space: nowrap;
+      }
+    }
+
+    .empty {
+      padding: 18px 8px;
+      text-align: center;
+      color: #c9b88c;
+      font-style: italic;
+    }
+  }
+}

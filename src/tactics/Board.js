@@ -110,15 +110,11 @@ export default class Board {
     card.stage.on('pointertap', () => {
       const els = card.elements;
 
-      if (els.layer1.visible) {
-        els.layer1.visible = !(els.layer2.visible = true);
-        return card.render();
-      } else if (els.layer2.visible) {
-        els.layer2.visible = !(els.layer3.visible = true);
-        return card.render();
-      } else if (els.layer4.visible) {
+      if (els.layer4.visible)
         return this._emit({ type:'card-tap' });
-      }
+
+      if (this.carded)
+        return this._emit({ type:'card-show-info', unit:this.carded });
 
       this.eraseCard();
     });

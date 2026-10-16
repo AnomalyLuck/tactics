@@ -9,6 +9,7 @@ import GameSettingsModal from 'components/Modal/GameSettings.js';
 import PlayerInfoModal from 'components/Modal/PlayerInfo.js';
 import PlayerInfoSelfModal from 'components/Modal/PlayerInfoSelf.js';
 import SetPicker from 'components/Modal/SetPicker.js';
+import showUnitInfoPopup from 'components/UnitInfoPopup.js';
 import sleep from 'utils/sleep.js';
 
 const ServerError = Tactics.ServerError;
@@ -2042,6 +2043,9 @@ async function startGame() {
         $card.addClass('show');
       else if (event.nvalue === null)
         $card.removeClass('show');
+    })
+    .on('card-show-info', event => {
+      showUnitInfoPopup(event.unit);
     })
     .on('lock-change', event => {
       if (event.nvalue === 'gameover')

@@ -1,6 +1,7 @@
 import { gameConfig } from 'config/client.js';
 import popup from 'components/popup.js';
 import GameSettingsModal from 'components/Modal/GameSettings.js';
+import showUnitInfoPopup from 'components/UnitInfoPopup.js';
 
 var game;
 var settings;
@@ -308,6 +309,9 @@ async function startGame() {
         $card.addClass('show');
       else if (event.nvalue === null)
         $card.removeClass('show');
+    })
+    .on('card-show-info', event => {
+      showUnitInfoPopup(event.unit);
     })
     .on('lock-change', event => {
       if (event.nvalue === 'gameover') {

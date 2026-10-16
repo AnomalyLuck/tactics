@@ -11,6 +11,7 @@ import seqAsync from 'utils/seqAsync.js';
 
 import 'components/Modal/SetBuilder.scss';
 import popup from 'components/popup.js';
+import showUnitInfoPopup from 'components/UnitInfoPopup.js';
 import Board, {
   TILE_WIDTH,
   TILE_HEIGHT,
@@ -59,6 +60,9 @@ export default class SetBuilder extends Modal {
     this.on('cancel', this._onCancel.bind(this));
 
     const board = new Board();
+    board.on('card-show-info', event => {
+      showUnitInfoPopup(event.unit);
+    });
     board.on('card-tap', () => {
       popup({
         title: 'Set Management Tips',

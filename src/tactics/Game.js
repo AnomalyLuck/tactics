@@ -65,6 +65,7 @@ export default class Game {
       .on('turn',        event => this._submitAction(event))
       .on('endTurn',     event => this._submitAction(event))
       .on('card-change', event => this._emit(event))
+      .on('card-show-info', event => this._emit(event))
       .on('lock-change', event => this._emit(event));
 
     const whilePlaying = Promise.resolve();
